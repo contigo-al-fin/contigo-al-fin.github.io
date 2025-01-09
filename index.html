@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Nuestro Mundo Mágico de Amor ✨</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --primary: #ff69b4;
+  --primary-dark: #ff1493;
+  --secondary: #9f7aea;
+  --secondary-dark: #805ad5;
+  --accent: #f6e05e;
+  --bg-dark: #1a1a2e;
+  --text-light: #ffffff;
+  --text-dark: #2d3748;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(159, 122, 234, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(237, 100, 166, 0.15) 0%, transparent 50%);
+}
+
+.photo-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+.photo-item {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.05);
+  aspect-ratio: 1;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.photo-item:hover img {
+  transform: scale(1.05);
+}
+
+.particle {
+  position: fixed;
+  pointer-events: none;
+  animation: float-particle 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  opacity: 0;
+  z-index: 9998;
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+  transform-origin: center center;
+}
+
+@keyframes float-particle {
+  0% {
+    transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(var(--x-end)) rotate(360deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.envelope-wrapper {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, var(--bg-dark) 0%, #0f0f1a 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope {
+  width: 320px;
+  height: 220px;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border-radius: 15px;
+  box-shadow: 
+    0 10px 30px rgba(0, 0, 0, 0.3),
+    0 0 60px rgba(159, 122, 234, 0.3);
+  animation: envelope-float 3s ease-in-out infinite;
+}
+
+.envelope:hover {
+  transform: scale(1.05) rotate(5deg);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.4),
+    0 0 80px rgba(159, 122, 234, 0.4);
+}
+
+@keyframes envelope-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+.envelope::before {
+  content: '💌';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.3),
+    0 0 20px rgba(255, 255, 255, 0.5);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.1);
+  }
+}
+
+.envelope-text {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  color: var(--text-light);
+  font-size: 1.3rem;
+  font-family: 'Dancing Script', cursive;
+  text-align: center;
+  opacity: 0.9;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.floating-cat {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  font-size: 3.5rem;
+  z-index: 1000;
+  animation: cat-float 4s ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+  transition: transform 0.3s ease;
+}
+
+.floating-cat:hover {
+  transform: scale(1.2) rotate(15deg);
+}
+
+@keyframes cat-float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(-5deg);
+  }
+}
+
+.main-content {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.section {
+  margin: 5rem 0;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 30px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transform: translateZ(0);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.2),
+    0 0 30px rgba(159, 122, 234, 0.1);
+}
+
+.section-title {
+  font-size: 2.5rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+  font-family: 'Dancing Script', cursive;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.1);
+}
+
+.love-declaration {
+  text-align: center;
+  padding: 2rem;
+}
+
+.story-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.story-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at center, rgba(255, 105, 180, 0.1) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.story-card p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+.music-section {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.music-title {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-family: 'Dancing Script', cursive;
+}
+
+.music-list {
+  list-style: none;
+  padding: 0;
+}
+
+.music-list li {
+  margin: 1.5rem 0;
+  font-size: 1.2rem;
+  color: var(--text-light);
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.music-list li::before {
+  content: '🎵';
+  font-size: 1.5rem;
+}
+
+.music-list li:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.love-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.love-list li {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.love-list li::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent, rgba(255, 105, 180, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.love-list li:hover::before {
+  transform: translateX(100%);
+}
+
+.dreams-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.dream-bubble {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.dream-bubble:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dream-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.poetry-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 2rem 0;
+  text-align: center;
+}
+
+.poetry-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: var(--primary);
+}
+
+.poetry-card p {
+  font-size: 1.2rem;
+  line-height: 2;
+}
+
+.moment-card {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+  margin: 1.5rem 0;
+  transition: all 0.3s ease;
+}
+
+.moment-card:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.moment-card h3 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.gratitude-list {
+  list-style: none;
+  padding: 0;
+}
+
+.gratitude-item {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  border-radius: 15px;
+  margin: 1rem 0;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 3rem;
+}
+
+.gratitude-item::before {
+  content: '💝';
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}.gratitude-item:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dynamic-words {
+  font-size: 2rem;
+  color: var(--primary);
+  text-align: center;
+  margin: 2rem 0;
+  min-height: 4rem;
+  font-family: 'Dancing Script', cursive;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.dynamic-words.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hidden {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  .section-title {
+    font-size: 2rem;
+  }
+  
+  .magic-text {
+    font-size: 1.5rem;
+  }
+  
+  .floating-cat {
+    font-size: 3rem;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  .envelope {
+    width: 280px;
+    height: 180px;
+  }
+  
+  .dreams-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .dream-bubble {
+    width: 100%;
+  }
+  
+  .section {
+    padding: 2rem;
+    margin: 3rem 0;
+  }
+  
+  .love-list {
+    grid-template-columns: 1fr;
+  }
+  
+  .poetry-card {
+    padding: 2rem;
+    margin: 1rem;
+  }
+  
+  .photo-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.8rem;
+  }
+  
+  .magic-text {
+    font-size: 1.3rem;
+  }
+  
+  .envelope {
+    width: 240px;
+    height: 160px;
+  }
+  
+  .envelope-text {
+    font-size: 1.1rem;
+  }
+  
+  .floating-cat {
+    font-size: 2.5rem;
+    bottom: 15px;
+    right: 15px;
+  }
+  
+  .photo-gallery {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+}
+</style>
+</head>
+<body>
+  
+  <div id="floating-player" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: rgba(255, 105, 180, 0.1); backdrop-filter: blur(10px); padding: 10px; border-radius: 15px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255, 255, 255, 0.2);">
+    <audio id="bgMusic" loop>
+        <source src="Contigo al Fin.mp3" type="audio/mp3">
+    </audio>
+    <button id="toggleMusic" style="background: none; border: none; color: white; cursor: pointer; font-size: 1.5rem; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; background: rgba(255, 255, 255, 0.1);">
+        <i class="fas fa-play" id="playIcon"></i>
+    </button>
+    <div style="font-size: 0.8rem; color: white; font-family: 'Poppins', sans-serif;">
+        Contigo hasta el fin ❤️
+    </div>
+</div>
+<div id="particleContainer"></div>
+
+<script>
+    const bgMusic = document.getElementById('bgMusic');
+    const toggleMusic = document.getElementById('toggleMusic');
+    const playIcon = document.getElementById('playIcon');
+
+    toggleMusic.addEventListener('click', () => {
+        if (bgMusic.paused) {
+            bgMusic.play();
+            playIcon.className = 'fas fa-pause';
+        } else {
+            bgMusic.pause();
+            playIcon.className = 'fas fa-play';
+        }
+    });
+</script>
+
+
+<div class="envelope-wrapper" id="envelopeWrapper">
+  <div class="envelope" id="envelope">
+    <div class="envelope-text">Haz click para descubrir nuestra magia ✨</div>
+  </div>
+</div>
+<div class="floating-cat" id="floatingCat">😸</div>
+<main class="main-content hidden" id="mainContent">
+  <section class="section">
+    <h1 class="section-title">Nuestro Mundo Mágico de Amor</h1>
+    <p class="magic-text">Donde cada momento juntos es un tesoro eterno...</p>
+  </section>
+
+  <section class="section">
+    <div class="love-declaration">
+      <h2 class="section-title">Mi Amor por Ti ❤️</h2>
+      <div class="story-card">
+        <p>Mi amor por ti es como un universo en constante expansión, lleno de estrellas brillantes que representan cada momento especial que compartimos. Eres el sueño que nunca supe que tenía hasta que te encontré, la melodía perfecta que complementa la sinfonía de mi vida. En cada latido de mi corazón está tu nombre, en cada suspiro está tu recuerdo, y en cada momento de mi vida está presente tu amor.</p>
+        <p>Contigo, los días grises se vuelven arcoíris, y las noches oscuras se llenan de estrellas. Tu amor me hace mejor persona, me inspira a soñar más alto y me da la fuerza para alcanzar cualquier meta. Te amo sin condiciones, sin límites, y sin final, porque eres el regalo más hermoso que la vida me ha dado.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">📸 Fotos Que Me Gustan de Ti 📸</h2>
+      <div class="photo-gallery">
+        <div class="photo-item">
+          <img src="aylin (1).jpg" alt="Foto 1">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (2).png" alt="Foto 2">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (3).jpg" alt="Foto 3">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (4).png" alt="Foto 4">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (5).jpg" alt="Foto 5">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (6).png" alt="Foto 6">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (7).png" alt="Foto 7">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (8).png" alt="Foto 8">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (9).jpg" alt="Foto 9">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (10).png" alt="Foto 10">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (11).jpg" alt="Foto 11">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (12).png" alt="Foto 12">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (13.jpg" alt="Foto 13">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (14).png" alt="Foto 14">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (15).png" alt="Foto 15">
+        </div>
+        <div class="photo-item">
+          <img src="aylin (16).png" alt="Foto 16">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+  <section class="section">
+    <div class="music-section">
+      <h2 class="music-title">🎵 Nuestra Playlist del Amor 🎵</h2>
+      <div class="music-list">
+        <div class="music-card" data-song="mas_que_amigos.mp3">
+          <div class="music-icon">
+            <i class="fas fa-music"></i>
+          </div>
+          <div class="music-info">
+            <h3>Más que amigos</h3>
+            <p>Matisse</p>
+          </div>
+          <div class="music-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="music-wave">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <audio class="song-audio" src="mas_que_amigos.mp3.mp3"></audio>
+        </div>
+  
+        <div class="music-card" data-song="mal_necesario.mp3">
+          <div class="music-icon">
+            <i class="fas fa-music"></i>
+          </div>
+          <div class="music-info">
+            <h3>Mal necesario</h3>
+            <p>Skipper</p>
+          </div>
+          <div class="music-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="music-wave">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <audio class="song-audio" src="SKIPER RMZ - MAL NECESARIO (Prod. by JA Music).mp3"></audio>
+        </div>
+  
+        <div class="music-card" data-song="lunares.mp3">
+          <div class="music-icon">
+            <i class="fas fa-music"></i>
+          </div>
+          <div class="music-info">
+            <h3>Lunares</h3>
+            <p>Jaze</p>
+          </div>
+          <div class="music-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="music-wave">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <audio class="song-audio" src="Jaze - Lunares (Video Oficial).mp3"></audio>
+        </div>
+  
+        <div class="music-card" data-song="si_te_preguntan.mp3">
+          <div class="music-icon">
+            <i class="fas fa-music"></i>
+          </div>
+          <div class="music-info">
+            <h3>Si te preguntan</h3>
+            <p>Pole</p>
+          </div>
+          <div class="music-controls">
+            <button class="play-btn">
+              <i class="fas fa-play"></i>
+            </button>
+            <div class="music-wave">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+          <audio class="song-audio" src="Pole. - Si te preguntan (Lyric Video) [vkaOCt_mgds].mp3"></audio>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <style>
+  .music-section {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 2rem 0;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  
+  .music-title {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-family: 'Dancing Script', cursive;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .music-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .music-card {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 1.5rem;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .music-card:hover {
+    transform: translateX(10px);
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  }
+  
+  .music-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  .music-info {
+    flex: 1;
+  }
+  
+  .music-info h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: var(--text-light);
+  }
+  
+  .music-info p {
+    font-size: 0.9rem;
+    margin: 0.3rem 0 0;
+    color: rgba(255, 255, 255, 0.7);
+  }
+  
+  .music-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .play-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .play-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: scale(1.1);
+  }
+  
+  .music-wave {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    height: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .music-wave span {
+    width: 3px;
+    height: 100%;
+    background: var(--primary);
+    border-radius: 3px;
+    animation: wave 1.2s ease-in-out infinite;
+    transform-origin: bottom;
+    opacity: 0;
+  }
+  
+  @keyframes wave {
+    0%, 100% {
+      transform: scaleY(0.3);
+    }
+    50% {
+      transform: scaleY(1);
+    }
+  }
+  
+  .music-wave span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .music-wave span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  .music-wave span:nth-child(4) {
+    animation-delay: 0.6s;
+  }
+  
+  .music-card.playing .music-wave {
+    opacity: 1;
+  }
+  
+  .music-card.playing .music-wave span {
+    opacity: 1;
+  }
+  
+  .music-card.playing .play-btn i {
+    content: "\f04c";
+  }
+  
+  @media (max-width: 768px) {
+    .music-card {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  
+    .music-icon {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+  
+    .music-info h3 {
+      font-size: 1rem;
+    }
+  
+    .music-info p {
+      font-size: 0.8rem;
+    }
+  }
+  </style>
+  
+  <script>
+  document.querySelectorAll('.music-card').forEach(card => {
+    const playBtn = card.querySelector('.play-btn');
+    const playIcon = playBtn.querySelector('i');
+    const audio = card.querySelector('.song-audio');
+    let isPlaying = false;
+  
+    card.addEventListener('click', () => {
+      const allCards = document.querySelectorAll('.music-card');
+      
+      // Stop all other playing audio
+      allCards.forEach(otherCard => {
+        if(otherCard !== card) {
+          const otherAudio = otherCard.querySelector('.song-audio');
+          otherCard.classList.remove('playing');
+          otherCard.querySelector('.play-btn i').className = 'fas fa-play';
+          if(otherAudio) {
+            otherAudio.pause();
+            otherAudio.currentTime = 0;
+          }
+        }
+      });
+  
+      if(isPlaying) {
+        audio.pause();
+        card.classList.remove('playing');
+        playIcon.className = 'fas fa-play';
+      } else {
+        audio.play().catch(error => {
+          console.log("Error playing audio:", error);
+        });
+        card.classList.add('playing');
+        playIcon.className = 'fas fa-pause';
+      }
+      
+      isPlaying = !isPlaying;
+    });
+  
+    // Handle audio ending
+    audio.addEventListener('ended', () => {
+      isPlaying = false;
+      card.classList.remove('playing');
+      playIcon.className = 'fas fa-play';
+    });
+  });
+  </script>
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">💝 Las Razones de Mi Amor 💫</h2>
+      <ul class="love-list">
+        <li>Tu sonrisa ilumina mi mundo como mil soles y hace que todo sea mejor 💖</li>
+        <li>Tu forma única y especial de hacerme reír, incluso en los momentos más difíciles 😸</li>
+        <li>La manera mágica en que ves el mundo, encontrando belleza en cada detalle 💕</li>
+        <li>La pasión que pones en todo lo que haces, inspirándome a ser mejor cada día ❤️</li>
+        <li>Tu corazón bondadoso y la forma increíble en que cuidas de los demás 🎶</li>
+        <li>El apoyo incondicional que me das en cada paso del camino, siendo mi roca 💫</li>
+        <li>Tu inteligencia brillante y la forma en que me haces crecer como persona 🌟</li>
+        <li>Los pequeños detalles y sorpresas que hacen especial cada momento juntos 💝</li>
+        <li>Tu valentía para enfrentar los desafíos y nunca rendirte ante las adversidades 💪</li>
+        <li>La magia que traes a mi vida con solo existir, haciendo cada día extraordinario 🌈</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">✨ Nuestros Sueños Juntos 💫</h2>
+      <div class="dreams-container">
+        <div class="dream-bubble">
+          <span class="dream-icon">🏠</span>
+          <p>Construir nuestro hogar lleno de amor, risas y momentos inolvidables</p>
+        </div>
+        <div class="dream-bubble">
+          <span class="dream-icon">✈️</span>
+          <p>Explorar el mundo juntos, creando memorias en cada rincón que visitemos</p>
+        </div>
+        <div class="dream-bubble">
+          <span class="dream-icon">👨‍👩‍👧‍👦</span>
+          <p>Formar una familia llena de amor, alegría y valores que perduren</p>
+        </div>
+        <div class="dream-bubble">
+          <span class="dream-icon">🌱</span>
+          <p>Crecer juntos en amor, comprensión y hacer realidad nuestros sueños</p>
+        </div>
+        <div class="dream-bubble">
+          <span class="dream-icon">🎓</span>
+          <p>Apoyarnos en nuestro desarrollo profesional y personal</p>
+        </div>
+        <div class="dream-bubble">
+          <span class="dream-icon">🌟</span>
+          <p>Crear tradiciones únicas que nos hagan especiales</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">📝 Versos de Amor 💕</h2>
+      <div class="poetry-card">
+        <h3>Melodía de Nuestro Amor</h3>
+        <p>
+        En el silencio de la noche<br>
+        escucho el eco de tu voz,<br>
+        como música celestial<br>
+        que acelera mi corazón.<br><br>
+        Cada nota de tu risa<br>
+        compone una sinfonía,<br>
+        que hace mi mundo girar<br>
+        y llena de color mis días.<br><br>
+        Eres la canción perfecta<br>
+        que nunca deja de sonar,<br>
+        la melodía de mi vida,<br>
+        mi razón para soñar.
+        </p>
+      </div>
+      <div class="poetry-card">
+        <h3>Luz de Mi Universo</h3>
+        <p>
+        Entre millones de estrellas<br>
+        brillas con luz especial,<br>
+        guiando mis pasos perdidos<br>
+        hacia un amor sin igual.<br><br>
+        No hay distancia ni tiempo<br>
+        que pueda nuestro amor borrar,<br>
+        pues cada latido mío<br>
+        con el tuyo va a compás.<br><br>
+        Eres mi norte y mi sur,<br>
+        mi este y mi oeste también,<br>
+        el centro de mi universo,<br>
+        mi principio y mi después.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">💝 Momentos Mágicos 💫</h2>
+      <div class="moment-card">
+        <h3>🌅 Amaneceres Contigo</h3>
+        <p>Cada mensaje de buenos días es como el primer rayo de sol que ilumina mi mañana, recordándome lo afortunado/a que soy de tenerte en mi vida.</p>
+      </div>
+      <div class="moment-card">
+        <h3>😊 Nuestras Risas</h3>
+        <p>Cada carcajada compartida es un tesoro que guardo en mi corazón, un momento de pura felicidad que hace que todo valga la pena.</p>
+      </div>
+      <div class="moment-card">
+        <h3>🌙 Noches Estrelladas</h3>
+        <p>Esos momentos tranquilos donde el mundo se detiene y solo existimos tú y yo, bajo un cielo lleno de estrellas y promesas.</p>
+      </div>
+      <div class="moment-card">
+        <h3>🤗 Abrazos Infinitos</h3>
+        <p>Cada abrazo tuyo es mi refugio perfecto, donde encuentro paz, amor y la certeza de que todo estará bien mientras estemos juntos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">CUIDADO IMAGEN QUE ODIO PERO TE GUSTA</h2>
+    <div style="text-align: center;">
+      <div id="imageTrigger" style="cursor: pointer; padding: 1rem; border: 2px dashed var(--primary); border-radius: 15px;">
+        <p id="triggerText">Toca aquí para mostrar la imagen</p>
+      </div>
+      <img id="jokeImage" src="broma 1.jpg" alt="Imagen de broma" 
+           style="max-width: 100%; height: auto; border-radius: 15px; border: 2px solid var(--primary); display: none;">
+      <img id="realImage" src="broma 2.jpeg" alt="Imagen real" 
+           style="max-width: 100%; height: auto; border-radius: 15px; border: 2px solid var(--primary); display: none;">
+    </div>
+  </section>
+  
+  <script>
+    const trigger = document.getElementById('imageTrigger');
+    const triggerText = document.getElementById('triggerText');
+    const jokeImage = document.getElementById('jokeImage');
+    const realImage = document.getElementById('realImage');
+  
+    let clickCount = 0;
+  
+    trigger.addEventListener('click', () => {
+      clickCount++;
+  
+      if (clickCount === 1) {
+        triggerText.textContent = 'Bromita, vuélvele a picar';
+        jokeImage.style.display = 'block';
+      } else if (clickCount === 2) {
+        trigger.style.display = 'none';
+        jokeImage.style.display = 'none';
+        realImage.style.display = 'block';
+      }
+    });
+  </script>
+  
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">🙏 Gratitud Eterna 🙏</h2>
+      <ul class="gratitude-list">
+        <li class="gratitude-item">Por tu amor incondicional que me hace mejor persona cada día</li>
+        <li class="gratitude-item">Por tu apoyo inquebrantable en los momentos difíciles</li>
+        <li class="gratitude-item">Por las risas compartidas que iluminan nuestros días</li>
+        <li class="gratitude-item">Por la paz que siento cuando estoy a tu lado</li>
+        <li class="gratitude-item">Por ser mi compañero/a de aventuras en este viaje llamado vida</li>
+        <li class="gratitude-item">Por creer en mí incluso cuando yo dudo</li>
+        <li class="gratitude-item">Por hacer especial cada momento ordinario</li>
+      </ul>
+    </div>
+  </section>
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">¿Por qué ya no usas tus lentes? 🧐</h2>
+      <p>Úsalos, ¿sí?... <strong>Atte: Te amo mucho ❤️</strong></p>
+    </div>
+  </section>
+  
+</main>
+
+<script>
+const emojis = ['💖', '🎶', '❤️', '💕', '😸', '😍', '😘', '✨', '🌟', '💫', '🦋', '🌸'];
+const particleContainer = document.getElementById('particleContainer');
+
+function createParticle() {
+  const particle = document.createElement('div');
+  particle.className = 'particle';
+  particle.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+  const startX = Math.random() * window.innerWidth;
+  const xEnd = (Math.random() - 0.5) * 200;
+  particle.style.setProperty('--x-end', `${xEnd}px`);
+  particle.style.left = `${startX}px`;
+  particle.style.bottom = '-20px';
+  particle.style.fontSize = `${Math.random() * 20 + 10}px`;
+  particleContainer.appendChild(particle);
+  
+  setTimeout(() => {
+    particle.remove();
+  }, 8000);
+}
+
+setInterval(createParticle, 200);
+
+document.getElementById('envelope').addEventListener('click', function() {
+  const envelope = document.getElementById('envelopeWrapper');
+  const mainContent = document.getElementById('mainContent');
+  
+  envelope.style.opacity = '0';
+  
+  setTimeout(() => {
+    envelope.classList.add('hidden');
+    mainContent.classList.remove('hidden');
+    
+    setTimeout(() => {
+      mainContent.style.opacity = '1';
+      mainContent.style.transform = 'translateY(0)';
+      
+      gsap.registerPlugin(ScrollTrigger);
+      
+      gsap.utils.toArray('.section').forEach((section, i) => {
+        gsap.from(section, {
+          scrollTrigger: {
+            trigger: section,
+            start: 'top center+=100',
+            toggleActions: 'play none none reverse'
+          },
+          opacity: 0,
+          y: 50,
+          duration: 1,
+          delay: i * 0.1
+        });
+      });
+    }, 100);
+  }, 800);
+});
+
+const floatingCat = document.getElementById('floatingCat');
+floatingCat.addEventListener('click', () => {
+  floatingCat.style.transform = 'scale(1.3) rotate(360deg)';
+  setTimeout(() => {
+    floatingCat.style.transform = '';
+  }, 1000);
+  createHeartBurst();
+});
+
+function createHeartBurst() {
+  for (let i = 0; i < 10; i++) {
+    const heart = document.createElement('div');
+    heart.className = 'particle';
+    heart.textContent = '❤️';
+    heart.style.left = `${Math.random() * window.innerWidth}px`;
+    heart.style.bottom = '30px';
+    particleContainer.appendChild(heart);
+    
+    setTimeout(() => {
+      heart.remove();
+    }, 3000);
+  }
+}
+
+const messages = [
+  "Cada día te amo más... 💕",
+  "Eres mi mejor aventura... ✨",
+  "Contigo todo es posible... 🌟",
+  "Mi corazón es tuyo... ❤️",
+  "Por siempre juntos... 💑",
+  "Eres mi felicidad... 🦋",
+  "Mi amor eterno... 💖"
+];
+
+const dynamicText = document.createElement('div');
+dynamicText.className = 'dynamic-words';
+document.querySelector('.main-content').appendChild(dynamicText);
+
+let messageIndex = 0;
+function updateMessage() {
+  dynamicText.style.opacity = '0';
+  dynamicText.style.transform = 'translateY(20px)';
+  
+  setTimeout(() => {
+    dynamicText.textContent = messages[messageIndex];
+    dynamicText.style.opacity = '1';
+    dynamicText.style.transform = 'translateY(0)';
+    messageIndex = (messageIndex + 1) % messages.length;
+  }, 600);
+}
+
+updateMessage();
+setInterval(updateMessage, 4000);
+
+document.getElementById('imageTrigger').addEventListener('click', function() {
+  const image = document.getElementById('hiddenImage');
+  image.style.display = 'block';
+  this.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
