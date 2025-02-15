@@ -554,7 +554,90 @@ body {
 </style>
 </head>
 <body>
-  
+  <div class="frase-container">
+    <p id="frase"></p>
+</div>
+<button class="frase-btn" onclick="nuevaFrase()">Otra frase</button>
+
+<script>
+    const frases = [
+        "Te vi, pero prometí no volver a llamar.",
+        "Me sentí mal, pero prometo no llamar.",
+        "Te soñé, pero juré no volver a escribir.",
+        "Leí nuestra última conversación, pero prometí no insistir.",
+        "Escuché nuestra canción, pero prometí no llorar."
+    ];
+
+    function escribirFrase(frase, elemento, velocidad = 50) {
+        elemento.textContent = "";
+        let i = 0;
+        function escribir() {
+            if (i < frase.length) {
+                elemento.textContent += frase.charAt(i);
+                i++;
+                setTimeout(escribir, velocidad);
+            }
+        }
+        escribir();
+    }
+
+    function nuevaFrase() {
+        const fraseElemento = document.getElementById('frase');
+        const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+
+        fraseElemento.style.opacity = '0';
+        setTimeout(() => {
+            escribirFrase(fraseAleatoria, fraseElemento);
+            fraseElemento.style.opacity = '1';
+        }, 500);
+    }
+
+    // Mostrar una frase al cargar la página
+    window.onload = () => nuevaFrase();
+</script>
+
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@400;600&display=swap');
+
+    .frase-container {
+        font-size: 26px;
+        font-weight: bold;
+        text-align: center;
+        padding: 20px;
+        color: #ff69b4;
+        background: linear-gradient(135deg, rgba(255, 105, 180, 0.2), rgba(255, 255, 255, 0.05));
+        border-radius: 12px;
+        margin: 30px auto;
+        width: fit-content;
+        min-width: 300px;
+        box-shadow: 0px 0px 10px rgba(255, 105, 180, 0.5);
+        backdrop-filter: blur(10px);
+        transition: opacity 0.5s ease-in-out;
+        font-family: 'Dancing Script', cursive;
+    }
+
+    .frase-btn {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 18px;
+        color: white;
+        background: linear-gradient(135deg, #ff69b4, #ff1493);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0px 0px 15px rgba(255, 20, 147, 0.5);
+        font-family: 'Poppins', sans-serif;
+    }
+
+    .frase-btn:hover {
+        background: linear-gradient(135deg, #ff1493, #ff69b4);
+        transform: scale(1.05);
+        box-shadow: 0px 0px 25px rgba(255, 20, 147, 0.7);
+    }
+</style>
+
   <div id="floating-player" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: rgba(255, 105, 180, 0.1); backdrop-filter: blur(10px); padding: 10px; border-radius: 15px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255, 255, 255, 0.2);">
     <audio id="bgMusic" loop>
         <source src="Contigo al Fin.mp3" type="audio/mp3">
