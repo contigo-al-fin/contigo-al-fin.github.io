@@ -554,7 +554,108 @@ body {
 </style>
 </head>
 <body>
-  
+
+  <h1>Te extraño</h1>
+
+<!-- Sección 1: Frases dinámicas -->
+<section id="frases" onclick="cambiarFrase()">
+    <h2>Mis pensamientos</h2>
+    <p id="texto">Sé que no volveremos a hablar pronto, pero aún te a...</p>
+</section>
+
+<!-- Sección 2: Contador de veces que la extrañaste -->
+<section id="contadorSeccion" onclick="registrarClick()">
+    <h2>Veces que te he extrañado</h2>
+    <p id="contador">💜 <span id="numContador">0</span></p>
+    <div id="corazones"></div>
+</section>
+
+<script>
+    let frases = [
+        "Sé que no volveremos a hablar pronto, pero aún te a...",
+        "A veces cierro los ojos y te imagino aquí...",
+        "No importa el tiempo que pase, siempre estarás en mi corazón...",
+        "Cada recuerdo contigo es un tesoro que guardo con cariño...",
+        "El destino nos separó, pero mis pensamientos aún te buscan..."
+    ];
+    let index = 0;
+    let contador = localStorage.getItem("contador") ? parseInt(localStorage.getItem("contador")) : 0;
+    let ultimaFecha = localStorage.getItem("ultimaFecha") || "";
+    let accesoPermitido = localStorage.getItem("acceso") === "true";
+
+    document.getElementById("numContador").innerText = contador;
+    document.getElementById("corazones").innerHTML = localStorage.getItem("corazones") || "";
+
+    function solicitarContrasena() {
+        let clave = prompt("Ingresa la contraseña para continuar:");
+        if (clave === "1730") {
+            accesoPermitido = true;
+            localStorage.setItem("acceso", "true");
+            alert("Acceso concedido. Ahora puedes interactuar.");
+        } else {
+            alert("Contraseña incorrecta. No puedes continuar.");
+        }
+    }
+
+    function cambiarFrase() {
+        index = (index + 1) % frases.length;
+        document.getElementById("texto").innerText = frases[index];
+    }
+
+    function registrarClick() {
+        if (!accesoPermitido) {
+            solicitarContrasena();
+            return;
+        }
+
+        let hoy = new Date().toLocaleDateString("es-ES"); // Formato: dd/mm/yyyy
+
+        if (hoy === ultimaFecha) {
+            alert("Solo puedes poner un corazón por día.");
+            return;
+        }
+
+        ultimaFecha = hoy;
+        localStorage.setItem("ultimaFecha", hoy);
+
+        contador++;
+        document.getElementById("numContador").innerText = contador;
+        localStorage.setItem("contador", contador);
+
+        // Agregar corazón con la fecha y guardarlo
+        let corazon = document.createElement("p");
+        corazon.innerHTML = `💜 ${hoy}`;
+        corazon.classList.add("corazon");
+        document.getElementById("corazones").appendChild(corazon);
+        localStorage.setItem("corazones", document.getElementById("corazones").innerHTML);
+    }
+</script>
+
+<style>
+    body {
+        text-align: center;
+        font-family: Arial, sans-serif;
+    }
+    section {
+        padding: 20px;
+        background-color: inherit; /* Mantiene el color original de la página */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        cursor: pointer;
+        max-width: 400px;
+    }
+    .corazon {
+        font-size: 20px;
+        color: #6a0dad;
+        animation: aparecer 0.5s ease-in-out;
+    }
+    @keyframes aparecer {
+        from { opacity: 0; transform: scale(0.5); }
+        to { opacity: 1; transform: scale(1); }
+    }
+</style>
+
   <div id="floating-player" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: rgba(255, 105, 180, 0.1); backdrop-filter: blur(10px); padding: 10px; border-radius: 15px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255, 255, 255, 0.2);">
     <audio id="bgMusic" loop>
         <source src="Contigo al Fin.mp3" type="audio/mp3">
