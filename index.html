@@ -554,123 +554,144 @@ body {
 </style>
 </head>
 <body>
+<style>
+  /* Estilos para los botones */
+  .btn {
+    background-color: #444; /* Gris oscuro */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Más redondeado */
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
 
-  <style>
-    /* Estilos para los botones */
-    .btn {
-      background-color: #444; /* Gris oscuro */
-      color: white;
-      border: none;
-      border-radius: 25px; /* Más redondeado */
-      padding: 12px 24px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: background-color 0.3s, transform 0.2s;
-    }
-  
-    .btn:hover {
-      background-color: #333; /* Gris aún más oscuro */
-      transform: scale(1.05);
-    }
-  
-    .btn:active {
-      background-color: #222; /* Gris más intenso */
-      transform: scale(1.02);
-    }
-  
-    /* Estilo para los contenedores de las secciones */
-    .section {
-      margin: 20px 0;
-      padding: 20px;
-      background-color: #333; /* Fondo oscuro */
-      color: white; /* Texto blanco */
-      border-radius: 10px;
-    }
-  
-    /* Estilo de las tarjetas */
-    .magic-card {
-      padding: 15px;
-      background-color: #444; /* Fondo oscuro */
-      color: white; /* Texto blanco */
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra más fuerte */
-    }
-  
-    /* Título de las secciones */
-    .section-title {
-      color: #FF4081; /* Rosa brillante para los títulos */
-    }
-  
-    /* Estilo para el contador */
-    #counterText {
-      color: #FF4081; /* Rosa brillante */
-    }
-  </style>
-  
-  <main>
-    <section class="section">
-      <div class="magic-card">
-        <h2 class="section-title">💭 Mis Pensamientos</h2>
-        <div class="thoughts-container">
-          <p id="thoughtText">Sé que no volveremos a hablar pronto, pero aún te a...</p>
-          <button class="btn" id="changeThoughtBtn">Cambiar Pensamiento</button>
-        </div>
+  .btn:hover {
+    background-color: #333; /* Gris aún más oscuro */
+    transform: scale(1.05);
+  }
+
+  .btn:active {
+    background-color: #222; /* Gris más intenso */
+    transform: scale(1.02);
+  }
+
+  /* Estilo para los contenedores de las secciones */
+  .section {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #333; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    border-radius: 10px;
+  }
+
+  /* Estilo de las tarjetas */
+  .magic-card {
+    padding: 15px;
+    background-color: #444; /* Fondo oscuro */
+    color: white; /* Texto blanco */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra más fuerte */
+  }
+
+  /* Título de las secciones */
+  .section-title {
+    color: #FF4081; /* Rosa brillante para los títulos */
+  }
+
+  /* Estilo para el contador */
+  #counterText {
+    color: #FF4081; /* Rosa brillante */
+  }
+</style>
+
+<main>
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">💭 Mis Pensamientos</h2>
+      <div class="thoughts-container">
+        <p id="thoughtText">Sé que no volveremos a hablar pronto, pero aún te a...</p>
+        <button class="btn" id="changeThoughtBtn">Cambiar Pensamiento</button>
       </div>
-    </section>
-  
-    <section class="section">
-      <div class="magic-card">
-        <h2 class="section-title">💖 Contador de Veces que te Extraño</h2>
-        <p id="counterText">Veces que te he extrañado: <span id="counterValue">0</span></p>
-        <button class="btn" id="increaseCounterBtn">Contar</button>
-        <div id="heartContainer"></div>
-      </div>
-    </section>
-  </main>
-  
-  <script>
-    // Lista de pensamientos
-    const thoughts = [
-      "Sé que no volveremos a hablar pronto, pero aún te a...",
-      "A veces cierro los ojos y te imagino aquí...",
-      "No importa el tiempo que pase, siempre estarás en mi corazón...",
-      "Cada recuerdo contigo es un tesoro que guardo con cariño...",
-      "El destino nos separó, pero mis pensamientos aún te buscan..."
-    ];
-  
-    let currentThoughtIndex = 0;
-  
-    // Cambio de pensamiento al hacer clic
-    document.getElementById('changeThoughtBtn').addEventListener('click', () => {
-      currentThoughtIndex = (currentThoughtIndex + 1) % thoughts.length;
-      document.getElementById('thoughtText').textContent = thoughts[currentThoughtIndex];
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="magic-card">
+      <h2 class="section-title">💖 Contador de Veces que te Extraño</h2>
+      <p id="counterText">Veces que te he extrañado: <span id="counterValue">0</span></p>
+      <button class="btn" id="increaseCounterBtn">Contar</button>
+      <div id="heartContainer"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+  // Lista de pensamientos
+  const thoughts = [
+    "Sé que no volveremos a hablar pronto, pero aún te a...",
+    "A veces cierro los ojos y te imagino aquí...",
+    "No importa el tiempo que pase, siempre estarás en mi corazón...",
+    "Cada recuerdo contigo es un tesoro que guardo con cariño...",
+    "El destino nos separó, pero mis pensamientos aún te buscan..."
+  ];
+
+  let currentThoughtIndex = 0;
+
+  // Cambio de pensamiento al hacer clic
+  document.getElementById('changeThoughtBtn').addEventListener('click', () => {
+    currentThoughtIndex = (currentThoughtIndex + 1) % thoughts.length;
+    document.getElementById('thoughtText').textContent = thoughts[currentThoughtIndex];
+  });
+
+  // Función para contar las veces que extrañas a alguien
+  const password = '1730';
+  let extraCount = localStorage.getItem('extraCount') || 0;
+  document.getElementById('counterValue').textContent = extraCount;
+
+  // Función para cargar los corazones almacenados
+  function loadHearts() {
+    const savedHearts = JSON.parse(localStorage.getItem('hearts')) || [];
+    const heartContainer = document.getElementById('heartContainer');
+    heartContainer.innerHTML = ""; // Limpiar antes de agregar
+
+    savedHearts.forEach(date => {
+      const heartDiv = document.createElement('div');
+      heartDiv.innerHTML = `❤️ ${date}`;
+      heartContainer.appendChild(heartDiv);
     });
-  
-    // Función para contar las veces que extrañas a alguien
-    const password = '1730';
-    let extraCount = localStorage.getItem('extraCount') || 0;
-  
-    document.getElementById('increaseCounterBtn').addEventListener('click', () => {
-      const inputPassword = prompt('Ingresa la contraseña:');
-      
-      if (inputPassword === password) {
-        if (extraCount < 1) {
-          extraCount++;
-          localStorage.setItem('extraCount', extraCount);
-          const currentDate = new Date().toLocaleDateString();
-          const heartDiv = document.createElement('div');
-          heartDiv.innerHTML = `❤️ ${currentDate}`;
-          document.getElementById('heartContainer').appendChild(heartDiv);
-          document.getElementById('counterValue').textContent = extraCount;
-        } else {
-          alert("Solo puedes contar una vez por día.");
-        }
+  }
+
+  loadHearts(); // Cargar corazones al iniciar
+
+  document.getElementById('increaseCounterBtn').addEventListener('click', () => {
+    const inputPassword = prompt('Ingresa la contraseña:');
+
+    if (inputPassword === password) {
+      const currentDate = new Date().toLocaleDateString();
+      let savedHearts = JSON.parse(localStorage.getItem('hearts')) || [];
+
+      if (!savedHearts.includes(currentDate)) {
+        extraCount++;
+        localStorage.setItem('extraCount', extraCount);
+        document.getElementById('counterValue').textContent = extraCount;
+
+        savedHearts.push(currentDate);
+        localStorage.setItem('hearts', JSON.stringify(savedHearts));
+
+        const heartDiv = document.createElement('div');
+        heartDiv.innerHTML = `❤️ ${currentDate}`;
+        document.getElementById('heartContainer').appendChild(heartDiv);
       } else {
-        alert("Contraseña incorrecta.");
+        alert("Solo puedes contar una vez por día.");
       }
-    });
-  </script>
-  
+    } else {
+      alert("Contraseña incorrecta.");
+    }
+  });
+</script>
+
   
   <div id="floating-player" style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: rgba(255, 105, 180, 0.1); backdrop-filter: blur(10px); padding: 10px; border-radius: 15px; display: flex; align-items: center; gap: 10px; border: 1px solid rgba(255, 255, 255, 0.2);">
     <audio id="bgMusic" loop>
